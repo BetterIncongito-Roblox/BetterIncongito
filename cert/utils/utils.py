@@ -1,4 +1,5 @@
 import os, re, shutil, psutil, requests
+from cert.utils.logger import debug, offset, info, error, bridge, send_message
 
 def is_process_running(process_name):
     for proc in psutil.process_iter(['name']):
@@ -7,18 +8,19 @@ def is_process_running(process_name):
     return False
 
 if is_process_running("Bloxstrap.exe"):
- print("Bloxstrap Detected")
+ info("Bloxstrap Detected")
  RBXPath = os.getenv("LOCALAPPDATA") + "\\Bloxstrap\\logs"
 else:
- print("Bloxstrap Detected")
+ info("Bloxstrap Detected")
  RBXPath = os.getenv("LOCALAPPDATA") + "\\Roblox\\logs"
 RENDER_VIEW_PATTERN = r"\[FLog::SurfaceController\] SurfaceController\[_:\d\]::initialize view\([A-F0-9]{16}\)"
 
 Version = "6.9"
-ExecName = "White Cat"
+ExecName = "SkidSploit"
 InternalUI = "false"
 
 class Offsets:
+    # thanks to whitecat for offsets
     DataModel = 0x198
 
     Name = 0x48

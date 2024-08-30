@@ -1,6 +1,11 @@
-import string, random, win32api, win32gui, win32con, win32process
+import string
+import random
+import win32api
+import win32gui
+import win32con
+import win32process
+import ctypes
 from cert.mempy.api import Memopy
-
 
 Window = None
 Process = Memopy(0)
@@ -39,30 +44,43 @@ def initialize():
     
     return True, ProcessId
 
+def send_key_input(key_code: int):
+    class KEYBDINPUT(ctypes.Structure):
+        _fields_ = [("wVk", wintypes.WORD), 
+                    ("wScan", wintypes.WORD), 
+                    ("dwFlags", wintypes.DWORD), 
+                    ("time", wintypes.DWORD), 
+                    ("dwExtraInfo", ctypes.POINTER(ctypes.c_ulong))]
+
+    class INPUT(ctypes.Structure):
+        _fields_ = [("type", wintypes.DWORD), 
+                    ("ki", KEYBDINPUT)]
+
+    INPUT_KEYBOARD = 1
+    KEYEVENTF_KEYUP = 0x0002
+
+    input_event = INPUT(type=INPUT_KEYBOARD, ki=KEYBDINPUT(
+        wVk=key_code,
+        wScan=0,
+        dwFlags=0,
+        time=0,
+        dwExtraInfo=None
+    ))
+
+    ctypes.windll.user32.SendInput(1, ctypes.byref(input_event), ctypes.sizeof(INPUT))
+
+    input_event.ki.dwFlags = KEYEVENTF_KEYUP
+    ctypes.windll.user32.SendInput(1, ctypes.byref(input_event), ctypes.sizeof(INPUT))
+
 def initialize_script_hook():
-    # TODO: FIND A BETTER WAY TO DO THIS AS THIS IS VERY DUMB AND LOOKS LIKE INCOG | MAYBE ASK GPT FOR A BETTER VERSION WITHOUT SETTING IT IN THE FOREGROUND!
+    Window = win32gui.FindWindow(None, "Roblox")
+    ProcessId = win32process.GetWindowThreadProcessId(Window)[1]
+    Process.update_pid(ProcessId)
 
-    def switch_to_roblox():
-        try:
-            win32gui.SetForegroundWindow(Window)
-        except:
-            switch_to_roblox()
-
-    switch_to_roblox()
+    if not Process.process_handle:
+        return False, -1
 
     while True:
         if win32gui.GetForegroundWindow() == Window:
-            win32api.keybd_event(
-                0, 
-                win32api.MapVirtualKey(win32con.VK_ESCAPE, 0), 
-                win32con.KEYEVENTF_SCANCODE, 
-                0
-            )
-            win32api.keybd_event(
-                0, 
-                win32api.MapVirtualKey(win32con.VK_ESCAPE, 0), 
-                win32con.KEYEVENTF_SCANCODE | win32con.KEYEVENTF_KEYUP,
-                0
-            )
-
+            send_key_input(win32api.MapVirtualKey(win32con.VK_ESCAPE, 0))
             break

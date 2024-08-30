@@ -89,7 +89,7 @@ function http_lib.request(options)
         local PlaceId = game.PlaceId
         local GameId = game.JobId -- ! Not sure, things that this could be are: (RbxAnalyticsService/game).GetPlaySessionId or RbxAnalyticsService.GetSessionId
 
-        Headers["User-Agent"] = "Roblox/WinInet"
+        Headers["User-Agent"] = "BetterIncongito/Roblox"
 
         Headers["Roblox-Place-Id"] = tostring(PlaceId)
         Headers["Roblox-Game-Id"] = GameId
@@ -135,8 +135,8 @@ function http_lib.request(options)
 
     local HWID = script_env.gethwid() --game:GetService("RbxAnalyticsService"):GetClientId() -- TODO Find something better
 
-    Headers["Incognito-Fingerprint"] = HWID
-    Headers["Incognito-User-Identifier"] = HWID
+    Headers["BetterIncognito-Fingerprint"] = HWID
+    Headers["BetterIncognito-User-Identifier"] = HWID
 
     local params =
         { -- https://github.com/MaximumADHD/Roblox-Client-Tracker/blob/master/LuaPackages/Packages/_Index/HttpRequest/HttpRequest/RequestFunctions/RequestInternal.lua#L6

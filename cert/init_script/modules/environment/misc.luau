@@ -22,7 +22,7 @@ function misc.setreadonly(t, lock)
 end
 
 function misc.identifyexecutor()
-    return "${EXEC_AUTOMATIC}", "${VERSION_AUTOMATIC}"
+    return "BetterIncognito", "69"
 end
 
 function misc.setclipboard(to_copy)
@@ -371,7 +371,7 @@ ce_like_loadstring_fn = loadstring;
 loadstring = nil;
 
 ]] .. script_env.httpget("https://api.luarmor.net/files/v3/l/" .. script_id .. ".lua")
-    return script_env.loadstring(code)({ Origin = "Savage" })
+    return script_env.loadstring(code)({ Origin = "BetterIncongito" })
 end
 
 return function(_script_env)

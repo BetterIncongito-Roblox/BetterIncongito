@@ -15,12 +15,6 @@ function scripts.getscriptbytecode(instance)
     return bytecode
 end
 
--- broken ass decompile
---function scripts.decompile(x)
---    local disassemble = script_env.loadstring(script_env.httpget("https://raw.githubusercontent.com/TheSeaweedMonster/Lua-Scripts/main/decompile.lua"))()
---    return disassemble(x)
---end
-
 function scripts.getscripthash(instance) -- TODO Replace by sha384(getscriptbytecode(instance)) later, current impl is bad
     assert(typeof(instance) == "Instance" and instance:IsA("LuaSourceContainer"), `arg #1 must be LuaSourceContainer`)
 

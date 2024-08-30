@@ -8,33 +8,33 @@ debugmode2 = True
 
 def debug(*args, **kwargs):
     if debugmode == True:
-        print(Fore.YELLOW + "[DEBUG]", *args, **kwargs)
+        print(Fore.YELLOW + "[SKIDSPLOIT]", *args, **kwargs)
 
 def bridge(*args, **kwargs):
     if debugmode == True:
         print("")
-        print(Fore.LIGHTYELLOW_EX + "[BRIDGE]", *args, **kwargs)
+        print(Fore.LIGHTYELLOW_EX + "[SKIDSPLOIT]", *args, **kwargs)
 
 def info(*args, **kwargs):
     if debugmode == True:
-        print(Fore.BLUE + "[INFO]", *args, **kwargs)
+        print(Fore.BLUE + "[SKIDSPLOIT]", *args, **kwargs)
 
 def error(*args, **kwargs):
     if debugmode == True:
-        print(Fore.RED + "[ERROR]", *args, **kwargs)
+        print(Fore.RED + "[SKIDSPLOIT]", *args, **kwargs)
 
 def offset(*args, **kwargs):
     if debugmode == True:
-        print(Fore.GREEN + "[OFFSET]", *args, **kwargs)
+        print(Fore.GREEN + "[SKIDSPLOIT]", *args, **kwargs)
 
 def printthread(*args, **kwargs):
     if threaddebugmode == True:
-        print(Fore.MAGENTA + "[THREADS]", *args, **kwargs)
+        print(Fore.MAGENTA + "[SKIDSPLOIT]", *args, **kwargs)
 
 def printsinglethread(*args, **kwargs):
     if debugmode == True and threaddebugmode == False:
         print("")
-        print(Fore.MAGENTA + "[THREAD]", *args, **kwargs)
+        print(Fore.MAGENTA + "[SKIDSPLOIT]", *args, **kwargs)
         print("")
 
 def send_message(message):
