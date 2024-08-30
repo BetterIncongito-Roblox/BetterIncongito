@@ -1,74 +1,27 @@
-  Offsets because im skibidi:
-  ```c#
-  constexpr std::uint32_t RenderToEngine = 0x10;
-constexpr std::uint32_t RenderToFakeDataModel = 0x118;
-constexpr std::uint32_t FakeDataModelToRealDataModel = 0x198;
-constexpr std::uint32_t Name = 0x48;
-constexpr std::uint32_t ClassDescriptor = 0x18;
-constexpr std::uint32_t Children = 0x50;
-constexpr std::uint32_t Parent = 0x60;
-constexpr std::uint32_t ChildSize = 0x8;
-constexpr std::uint32_t GameId = 0x160;
-constexpr std::uint32_t PlaceId = 0x168;
-constexpr std::uint32_t GameLoaded = 0x3b1;
-constexpr std::uint32_t LocalPlayer = 0x100;
-constexpr std::uint32_t ModelInstance = 0x298;
-constexpr std::uint32_t DisplayName = 0x100;
-constexpr std::uint32_t UserId = 0x1e8;
-constexpr std::uint32_t Team = 0x1d0;
-constexpr std::uint32_t CameraMinZoomDistance = 0x23c;
-constexpr std::uint32_t CameraMaxZoomDistance = 0x238;
-constexpr std::uint32_t Health = 0x17c;
-constexpr std::uint32_t MaxHealth = 0x1a8;
-constexpr std::uint32_t WalkSpeedA = 0x1c0;
-constexpr std::uint32_t WalkSpeedB = 0x398;
-constexpr std::uint32_t JumpPower = 0x1a4;
-constexpr std::uint32_t HipHeight = 0x194;
-constexpr std::uint32_t MaxSlopeAngle = 0x1ac;
-constexpr std::uint32_t RigType = 0x1b8;
-constexpr std::uint32_t MoveDirection = 0x13c;
-constexpr std::uint32_t Primitive = 0x150;
-constexpr std::uint32_t BasePartSize = 0x2ac;
-constexpr std::uint32_t BasePartPosition = 0x140;
-constexpr std::uint32_t CFrame = 0x11c;
-constexpr std::uint32_t AssemblyLinearVelocity = 0x14c;
-constexpr std::uint32_t AssemblyAngularVelocity = 0x158;
-constexpr std::uint32_t BasePartColor = 0x180;
-constexpr std::uint32_t Transparency = 0xd4;
-constexpr std::uint32_t LocalTransparencyModifier = 0xd8;
-constexpr std::uint32_t Reflectance = 0xd0;
-constexpr std::uint32_t Anchored = 0x309;
-constexpr std::uint32_t CanCollide = 0x30b;
-constexpr std::uint32_t MeshId = 0x250;
-constexpr std::uint32_t TextureId = 0x278;
-constexpr std::uint32_t CurrentCamera = 0x418;
-constexpr std::uint32_t CameraSubject = 0xc0;
-constexpr std::uint32_t CameraPosition = 0xf4;
-constexpr std::uint32_t CameraRotation = 0xd0;
-constexpr std::uint32_t CameraHeadScale = 0x144;
-constexpr std::uint32_t CameraFocus = 0x100;
-constexpr std::uint32_t CameraFOV = 0x134;
-constexpr std::uint32_t Brightness = 0x114;
-constexpr std::uint32_t FogEnd = 0x124;
-constexpr std::uint32_t GlobalShadows = 0x130;
-constexpr std::uint32_t ClientDimensions = 0x720;
-constexpr std::uint32_t ViewMatrix = 0x4b0;
-constexpr std::uint32_t AbsolutePosition = 0x100;
-constexpr std::uint32_t AbsoluteSize = 0x108;
-constexpr std::uint32_t Value = 0xc0;
-constexpr std::uint32_t TextLabelColor3 = 0xab0;
-constexpr std::uint32_t TextLabelText = 0x6a0;
-constexpr std::uint32_t Adornee = 0xc0;
-constexpr std::uint32_t InputObject = 0xf0;
-constexpr std::uint32_t MousePosition = 0xdc;
-```
+# BetterIncognito
 
+This is the official and latest source code of **BetterIncognito**. This Is A Better Version Off https://github.com/Incognito-Roblox/Incognito/ And Is More Skidded Because Its Updated
 
-# Working but not execution
+## Disclaimer
+Please note that the version of the software provided here was unfinished at the time. As such, it does not have execution yet.
 
-- Added new offset for ModuleScript
-- Added Bloxstrap detection to check its logs instead of Regular ROBLOX
+> [!WARNING]  
+> We Are Working On The Execution Only The Injection Works Of Now, and users should proceed with caution.
 
+> [!CAUTION]
+> **We are not liable for any damages caused or any consequences such as bans that may result from using this software. Users should proceed at their own risk.**
 
+## Learning and Usage
+This repository is a resource for learning and understanding. We hope that by making this code available, we can support the community in using and improving their own software safely and effectively.
 
-I love you savy bear <3
+## License
+Please ensure you **[read and follow the license](/LICENSE.md)** associated with this project. The license outlines the permissible uses and restrictions for this code. Adhering to these terms is crucial for legal use and further development of the software.
+
+Thank you, - **The Real Incognito Development Team**
+- [@piomanly](https://github.com/piomanly)
+- [@phoriah](https://github.com/phoriah)
+- [@usragent](https://github.com/usragent)
+- [@Ficelloo](https://github.com/Ficelloo)
+- [@jLn0n](https://github.com/jLn0n)
+
+Brought To You By Xero
