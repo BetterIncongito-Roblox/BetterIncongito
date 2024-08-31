@@ -27,3 +27,4 @@ Thanks To These People -
 - [@jLn0n](https://github.com/jLn0n)
 - [@Savage3991](https://github.com/Savage3991)
 - [@JulesExecutor](https://github.com/JulesExecutor)
+- [@FlexXero](https://github.com/FlexXero)
