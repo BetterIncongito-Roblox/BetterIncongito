@@ -1,6 +1,7 @@
-import ctypes, win32con
-import win32api
+# using kernel32 now
+import ctypes
 import win32con
+import win32api
 import win32process
 
 windll = ctypes.windll
@@ -84,19 +85,18 @@ class Memopy:
 
         memory_basic_info = MEMORY_BASIC_INFORMATION()
         
-        # if this gets patched go use kernel32
-        status = ntdll.NtQueryVirtualMemory(
+        # Use ntdll if this gets patched
+        status = kernel32.VirtualQueryEx(
             self.process_handle,
             ctypes.c_void_p(address),
-            0,  # MemoryBasicInformation
             ctypes.byref(memory_basic_info),
-            ctypes.sizeof(memory_basic_info),
-            None
+            ctypes.sizeof(memory_basic_info)
         )
         
-        if status != 0:
+        if status == 0:
             raise ctypes.WinError()
 
+        return memory_basic_info
 
     def suspend(self):
         ntdll.NtSuspendProcess(self.process_handle)
@@ -133,7 +133,7 @@ class Memopy:
 
     def virtual_protect(self, address: int, size: int, protect_val: int):
         old_prot_val = ctypes.c_ulong()
-        result = ctypes.windll.kernel32.VirtualProtectEx(
+        result = kernel32.VirtualProtectEx(
             self.process_handle,
             ctypes.c_void_p(address),
             size,
@@ -152,36 +152,39 @@ class Memopy:
             0x01
         )
 
-    def allocate_memory(self, size: int, address: int = None) -> int: # if this gets patched use kernel32 to allocate
+    def allocate_memory(self, size: int, address: int = None) -> int:
         addr = ctypes.c_void_p(address) if address else None
         base_address = ctypes.c_void_p()
         
-        status = ntdll.NtAllocateVirtualMemory(
+        # Use ntdll if this gets patched
+        base_address = kernel32.VirtualAllocEx(
             self.process_handle,
-            ctypes.byref(base_address),
-            0,
-            ctypes.byref(ctypes.c_size_t(size)),
+            addr,
+            size,
             win32con.MEM_RESERVE | win32con.MEM_COMMIT,
             win32con.PAGE_READWRITE
         )
 
-        if status != 0:
+        if not base_address:
             raise ctypes.WinError()
 
-        return base_address.value
+        return base_address
 
-
-    def free_memory(self, address: int, size: int): # if this gets patched then use kernel32 to freememory
-        return ntdll.NtFreeVirtualMemory(
+    def free_memory(self, address: int, size: int):
+        # Use ntdll if this gets patched
+        result = kernel32.VirtualFreeEx(
             self.process_handle,
-            ctypes.byref(ctypes.c_void_p(address)),
-            ctypes.byref(ctypes.c_size_t(size)),
-            0x8000
+            ctypes.c_void_p(address),
+            size,
+            win32con.MEM_RELEASE
         )
+
+        if not result:
+            raise ctypes.WinError()
 
     def read_memory(self, buffer, address: int):
         size = ctypes.sizeof(buffer)
-        ntdll.NtReadVirtualMemory(
+        kernel32.ReadProcessMemory(
             self.process_handle,
             ctypes.c_void_p(address),
             ctypes.byref(buffer),
@@ -190,26 +193,23 @@ class Memopy:
         )
         self.unlock_memory(address, size)
         
-        
     def write_memory(self, buffer, address: int) -> None:
         size = ctypes.sizeof(buffer)
         old_prot = self.virtual_protect(address, size, PROTECTIONS["READ_WRITE"])
         
-        # if this gets patched go use kernel32 to write
-        status = ntdll.NtWriteVirtualMemory(
+        # Use ntdll if this gets patched
+        result = kernel32.WriteProcessMemory(
             self.process_handle,
             ctypes.c_void_p(address),
-            ctypes.pointer(buffer),
+            ctypes.byref(buffer),
             size,
             None
         )
         
-        if status != 0:
+        if not result:
             raise ctypes.WinError()
 
         self.virtual_protect(address, size, old_prot)
-
-
 
     # read functions
 

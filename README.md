@@ -3,10 +3,10 @@
 This is the official and latest source code of **BetterIncognito**. This Is A Better Version Off https://github.com/Incognito-Roblox/Incognito/ And Is More Skidded Because Its Updated
 
 ## Disclaimer
-Please note that the version of the software provided here was unfinished at the time. As such, it does not have many functions yet.
+Please note that the version of the software provided here was unfinished at the time. As such, it does not have execution yet.
 
 > [!WARNING]  
-> We Are Working On The Functions Only The Injection And Simple Execution Works Of Now, and users should proceed with caution.
+> We Are Working On The Execution Only The Injection Works Of Now, and users should proceed with caution.
 
 > [!CAUTION]
 > **We are not liable for any damages caused or any consequences such as bans that may result from using this software. Users should proceed at their own risk.**
@@ -27,4 +27,3 @@ Thanks To These People -
 - [@jLn0n](https://github.com/jLn0n)
 - [@Savage3991](https://github.com/Savage3991)
 - [@JulesExecutor](https://github.com/JulesExecutor)
-- [@FlexXero](https://github.com/FlexXero)

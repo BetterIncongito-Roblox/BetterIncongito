@@ -4,7 +4,7 @@ changedidentity = false
 
 local thread = {}
 
-thread.thread_identity = 1356
+thread.thread_identity = 3
 
 function setthreadidentity(identity)
     changedidentity = true

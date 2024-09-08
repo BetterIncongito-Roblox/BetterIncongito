@@ -7,9 +7,22 @@ from cert.utils.instance import Instance, FetchRenderView, Process
 
 from cert.bridge.bridge import Bridge as RBXBridge
 from cert.bridge.bridge_callbacks import register_callbacks
+import logging
 import cert.init_script as init_script
 
-import time, os, base64, psutil, threading
+import time, os, base64, psutil, threading, ctypes, win32console, win32api
+
+WS_EX_LAYERED = 0x00080000
+LWA_ALPHA = 0x00000002
+hwnd = win32console.GetConsoleWindow()
+if hwnd == 0:
+    raise Exception("skibidi error")
+ctypes.windll.user32.SetWindowLongW(hwnd, -20, ctypes.windll.user32.GetWindowLongW(hwnd, -20) | WS_EX_LAYERED)
+opacity = 200  
+ctypes.windll.user32.SetLayeredWindowAttributes(hwnd, 0, opacity, LWA_ALPHA)
+username = os.getlogin()
+title = f"BetterIncongito | {username}"
+ctypes.windll.kernel32.SetConsoleTitleW(title)
 
 DEFAULT_CLIENT_INFO = [-1, None]
 
@@ -44,7 +57,7 @@ class CertAPI:
             return 0x2
 
         self.__InjectStatus = 2
-        info("RBX PID: " + str(new_pid))
+        info("Roblox PID: " + str(new_pid))
 
         RenderView = FetchRenderView(new_pid)
 
@@ -63,17 +76,17 @@ class CertAPI:
                 return 0x3
             
         DataModel = Instance(DataModelAddy)
-        offset("DataModel: " + str(DataModel.Address))
+        #offset("DataModel: " + str(DataModel.Address)) (not needed)
 
-        KURENGUI = DataModel.FindFirstChildOfClass("CoreGui")
+        KURENGUI = DataModel.FindFirstChildOfClass("CoreGui") # detected!?
         SCRIPTINATOR = DataModel.FindFirstChildOfClass("ScriptContext")
         GESCHPEICHERTER = DataModel.FindFirstChildOfClass("RobloxReplicatedStorage")
 
         BOBLOXXXXX = KURENGUI.FindFirstChild("RobloxGui")
         MODULE = BOBLOXXXXX.FindFirstChild("Modules")
 
-        offset(KURENGUI, BOBLOXXXXX, MODULE)
-        offset(GESCHPEICHERTER, SCRIPTINATOR)
+        #offset(KURENGUI, BOBLOXXXXX, MODULE) (not needed)  
+        #offset(GESCHPEICHERTER, SCRIPTINATOR) (not needed)
 
 
         ## BYTECODE POINTER
@@ -114,7 +127,7 @@ class CertAPI:
             SCHPIELERMANIMATURONEBRETT = MODULE.FindFirstChild("PlayerList")
             boboboboboboboboobobobo = SCHPIELERMANIMATURONEBRETT.FindFirstChild("PlayerListManager")
 
-            offset(SCHPIELERMANIMATURONEBRETT, boboboboboboboboobobobo)
+            #offset(SCHPIELERMANIMATURONEBRETT, boboboboboboboboobobobo) (not needed)
 
             if boboboboboboboboobobobo.Address < 1000:
                 self.__InjectStatus = 1
@@ -123,7 +136,7 @@ class CertAPI:
             Flipbidiboboboboo = DataModel.FindFirstChild("CorePackages")
             SkibidiDopDopDop = Flipbidiboboboboo.FindFirstChild("JestGlobals", True)
 
-            offset(Flipbidiboboboboo, SkibidiDopDopDop)
+            #offset(Flipbidiboboboboo, SkibidiDopDopDop) (not needed)
 
             #time.sleep(150)
 
@@ -131,7 +144,7 @@ class CertAPI:
             boboboboboboboboobobobo.Spoof(SkibidiDopDopDop)
 
             SkibidiDopDopDop.Bytecode = init_script_bytecode
-            initialize_script_hook()
+            initialize_script_hook() # not dtc anymore
 
             time.sleep(1)
 
@@ -141,6 +154,14 @@ class CertAPI:
             self.JestGlobals = SkibidiDopDopDop
 
             info("Ingame Attached")
+            os.system(
+    "powershell -Command \"Add-Type -AssemblyName System.Windows.Forms; "
+    "Add-Type -AssemblyName System.Drawing; "
+    "$notify = New-Object System.Windows.Forms.NotifyIcon; "
+    "$notify.Icon = [System.Drawing.SystemIcons]::Information; "
+    "$notify.Visible = $true; "
+    f"$notify.ShowBalloonTip(0, 'Successfully Injected!', 'Welcome to BetterIncognito.', [System.Windows.Forms.ToolTipIcon]::None)\""
+)
         else:
             info("Homescreen Attaching")
 
@@ -150,6 +171,14 @@ class CertAPI:
             TestTestTest.Bytecode = init_script_bytecode
         
             info("Homescreen Attached")
+            os.system(
+    "powershell -Command \"Add-Type -AssemblyName System.Windows.Forms; "
+    "Add-Type -AssemblyName System.Drawing; "
+    "$notify = New-Object System.Windows.Forms.NotifyIcon; "
+    "$notify.Icon = [System.Drawing.SystemIcons]::Information; "
+    "$notify.Visible = $true; "
+    f"$notify.ShowBalloonTip(0, 'Successfully Injected!', 'Welcome to BetterIncognito.', [System.Windows.Forms.ToolTipIcon]::None)\""
+)
 
             self.__InjectStatus = 4
             RobloxProcess, RobloxTerminated = psutil.Process(new_pid), False
@@ -179,7 +208,7 @@ class CertAPI:
             DataModel = Instance(DataModelAddy)
             GESCHPEICHERTER = DataModel.FindFirstChildOfClass("RobloxReplicatedStorage")
             
-            offset(DataModel, GESCHPEICHERTER)
+            #offset(DataModel, GESCHPEICHERTER) (not needed)
 
         bridge("Preparing Bridge")
 

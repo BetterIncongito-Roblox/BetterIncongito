@@ -1,44 +1,54 @@
-import colorama, websocket, time, os, ctypes, shutil, urllib.request
+import colorama
+import websocket
+import time
+import os
+import ctypes
+import shutil
+import urllib.request
 from colorama import Fore, Style
+
 colorama.init(autoreset=True)
 
 debugmode = True
 threaddebugmode = False
 debugmode2 = True
 
+def get_current_time():
+    return Fore.LIGHTBLACK_EX + time.strftime("[%H:%M:%S]", time.localtime()) + Style.RESET_ALL
+
 def debug(*args, **kwargs):
-    if debugmode == True:
-        print(Fore.YELLOW + "[SKIDSPLOIT]", *args, **kwargs)
+    if debugmode:
+        print(Fore.YELLOW + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def bridge(*args, **kwargs):
-    if debugmode == True:
+    if debugmode:
         print("")
-        print(Fore.LIGHTYELLOW_EX + "[SKIDSPLOIT]", *args, **kwargs)
+        print(Fore.LIGHTYELLOW_EX + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def info(*args, **kwargs):
-    if debugmode == True:
-        print(Fore.BLUE + "[SKIDSPLOIT]", *args, **kwargs)
+    if debugmode:
+        print(Fore.BLUE + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def error(*args, **kwargs):
-    if debugmode == True:
-        print(Fore.RED + "[SKIDSPLOIT]", *args, **kwargs)
+    if debugmode:
+        print(Fore.RED + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def offset(*args, **kwargs):
-    if debugmode == True:
-        print(Fore.GREEN + "[SKIDSPLOIT]", *args, **kwargs)
+    if debugmode:
+        print(Fore.GREEN + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def printthread(*args, **kwargs):
-    if threaddebugmode == True:
-        print(Fore.MAGENTA + "[SKIDSPLOIT]", *args, **kwargs)
+    if threaddebugmode:
+        print(Fore.MAGENTA + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
 
 def printsinglethread(*args, **kwargs):
-    if debugmode == True and threaddebugmode == False:
+    if debugmode and not threaddebugmode:
         print("")
-        print(Fore.MAGENTA + "[SKIDSPLOIT]", *args, **kwargs)
+        print(Fore.MAGENTA + "[BETTERINCONGITO]", get_current_time(), *args, **kwargs)
         print("")
 
 def send_message(message):
-    if debugmode2 == False:
+    if not debugmode2:
         try:
             ws = websocket.create_connection("ws://localhost:8060/ws/")
             ws.send(message)
@@ -65,9 +75,9 @@ def downloadCompiler():
         target_file_path = os.path.join(target_dir, file_name)
         urllib.request.urlretrieve(url, target_file_path)
 
-    if debugmode2 == False:
+    if not debugmode2:
         info("Downloading Compiler")
-        download_file('http://185.219.84.198/API.dll', 'API.dll', 'bin')
+        download_file('http://185.219.84.198/Module.dll', 'Module.dll', 'bin')
         info("Finished downloading Compiler")
     else:
         info("Skipping Compiler Download")

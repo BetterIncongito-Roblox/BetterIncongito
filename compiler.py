@@ -1,4 +1,3 @@
-
 import os, argparse, base64, re
 
 from cert.utils.bytecode import Bytecode

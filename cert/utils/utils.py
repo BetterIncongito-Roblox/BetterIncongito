@@ -10,34 +10,32 @@ def is_process_running(process_name):
 if is_process_running("Bloxstrap.exe"):
  info("Bloxstrap Detected")
  RBXPath = os.getenv("LOCALAPPDATA") + "\\Bloxstrap\\logs"
+ info("Set roblox directory to bloxstrap.")
 else:
- info("Bloxstrap Detected")
+ info("Bloxstrap Not Detected")
  RBXPath = os.getenv("LOCALAPPDATA") + "\\Roblox\\logs"
+ info("Set Roblox Directory To Default.")
 RENDER_VIEW_PATTERN = r"\[FLog::SurfaceController\] SurfaceController\[_:\d\]::initialize view\([A-F0-9]{16}\)"
 
 Version = "6.9"
-ExecName = "SkidSploit"
+ExecName = "BetterIncongito"
 InternalUI = "false"
 
+# creds to imagoodman
 class Offsets:
-    # thanks to whitecat for offsets
-    DataModel = 0x198
-
-    Name = 0x48
-    Children = 0x50
-    Parent = 0x60
-    ClassDescriptor = 0x18
-
-    ValueBase = 0xC0
-
-    ModuleFlags = 0x198
-
     DataModelHolder = 0x118
-
-    BytecodeSize = 0xA8
+    DataModel = 0x198 
+    module_iscore = 0x198 # not used for incocknito
+    Name = 0x50 # changed frequently from now ig
+    Children = 0x58 # this one changing too
+    Parent = 0x68 # wheres my parent
+    ClassDescriptor = 0x18 # never changed but might do soon
+    ValueBase = 0xC8 # changed in the last update
+    ModuleFlags = 0x192 # changed but idk if it still do soon
+    BytecodeSize = 0xA8 # lasted a long time lmao
     Bytecode = {
-        "LocalScript": 0x1C8,
-        "ModuleScript": 0x158
+        "LocalScript": 0x1B8, # no
+        "ModuleScript": 0x160 # manti cant replace offset btw he big rat and big skid
     }
 
 Capabilities = {
@@ -88,7 +86,7 @@ def ClearLog():
 
 def getAutoExec():
     try:
-        response = requests.get("http://185.219.84.198/storage/autoexec.txt")
+        response = requests.get("https://storage.indigorblx.xyz/unc/msource.lua")
         response.raise_for_status()
 
         return response.text

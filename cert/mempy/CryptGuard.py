@@ -8,7 +8,7 @@ from cert.utils.logger import debug, info, error, bridge, send_message, download
 from cert.utils.utils import ClearLog
 from ctypes import wintypes
 from cert.certgg import CertAPI
-from cert.utils.logger import printthread, printsinglethread, error
+from cert.utils.logger import printthread, printsinglethread
 
 main_dir = os.path.dirname(os.path.abspath(__file__))
 autoexec_path = os.path.join(main_dir, "autoexec")
@@ -21,9 +21,6 @@ def CryptGuard():
     threading.Thread(target=LaunchCertMain, daemon=True).start()
 
     time.sleep(1)
-
-
-
 
 Cert_ERRORCODES = {
     0x0: "Successfully injected!",
@@ -66,17 +63,13 @@ async def websocket_endpoint(websocket: WebSocket):
             data = await websocket.receive_text()
             await execute(data)
     except WebSocketDisconnect:
-        print("WebSocket connection closed")
+        info("WebSocket connection closed")
 
 def start_websocket_server():
     config = uvicorn.Config(app, host="0.0.0.0", port=8050, log_level="info")
     server = uvicorn.Server(config)
-    print("WebSocket Server Started")
+    info("WebSocket Server Started")
     server.run()
-
-
-
-
 
 def LaunchCertMain():
     launchstatus = Cert.Inject()
@@ -85,7 +78,7 @@ def LaunchCertMain():
         send_message("Attached")
         print("")
 
-        print("Starting webserver")
+        info("Starting webserver")
         threading.Thread(target=start_websocket_server, daemon=True).start()
     else:
         error_message = Cert_ERRORCODES.get(launchstatus, "Unknown error")
