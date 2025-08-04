@@ -1,3 +1,4 @@
+--DISCORD.GG/GETPARADISE
 local logService = game:GetService("LogService")
 local bridge = load_module("bridge")
 local sandbox = load_module("sandbox")
@@ -11,15 +12,13 @@ for i = 1, 1 do
 	print("-------------------------")
 end
 print("Developed By:")
-print("Xero - Internal Init (Fixing ENV soon)")
-print("White Cat - Making the Internal ui")
-print("--------------")
-print("Helpers:")
-print("ImAGoodManLoll - Offsets")
+print("Faded - Init")
+print("ImAGoodManLoll - Init")
+print("White Cat - Nothing")
 print("And", game.Players.LocalPlayer.Name, "for using our injector :)")
 print("--------------")
 warn("Errors:")
-warn("None!")
+warn("LOLO NO ENVIRONMENT LOADED = BASICALLY NO FUNCTIONS IM PRO")
 
 local BNInject = Instance.new("ScreenGui")
 local MainFrame = Instance.new("ImageLabel")
